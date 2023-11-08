@@ -11,14 +11,30 @@ class PostController extends Controller
     public function create(Request $r)
     {
         $newPost = [
-            'title' => 'Meu primeiro post',
-            'content' => ' Conteudo do post',
-            'author' => 'Pedro Poglia'
+            'title' => 'Meu segundo post',
+            'content' => ' Conteudo do segundo post',
+            'author' => 'Laura Legal Dadosa'
         ];
 
         $post  = new Post($newPost);
 
         $post->save();
         dd($post);
+    }
+
+    public function read(Request $r)
+    {
+        $post = New Post();
+        $post = $post ->find(1); // busca pela chave primaria
+
+        return($post);
+
+    }
+
+    public function all(Request $r)
+    {
+        $posts = Post::all();
+
+        return $posts;
     }
 }

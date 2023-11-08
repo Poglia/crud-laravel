@@ -19,3 +19,5 @@ Route::get('/', function () {
 });
 
 Route::get('/posts/create',  [PostController::class, 'create']);
+Route::get('/posts/read', [PostController::class, 'read']);
+Route::get('/posts/all', [PostController::class, 'all']);
