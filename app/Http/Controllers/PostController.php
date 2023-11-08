@@ -50,4 +50,20 @@ class PostController extends Controller
 
         return $posts;
     }
+
+    public function delete(Request $r)
+    {
+        $idPost = 4;
+        $post = Post::find($idPost);
+
+        //Exclusao em massa
+        // $post = Post::all()->delete();               // retorna collection (não funciona exclusão)
+        // $post = Post::where('id', '>', 0)->delete(); // retorna uma instancia dos models (Pode ser feita exclusão)
+
+        if ($post)
+            return $post->delete(); // retorna o numero de registros excluidos;
+
+
+        return "Não existe nenhum post com id = " . $idPost;
+    }
 }
