@@ -11,7 +11,7 @@ class PostController extends Controller
     public function create(Request $r)
     {
         $newPost = [
-            'title' => 'Meu segundo post',
+            'title' => 'Teste',
             'content' => ' Conteudo do segundo post',
             'author' => 'Laura Legal Dadosa'
         ];
@@ -19,7 +19,7 @@ class PostController extends Controller
         $post  = new Post($newPost);
 
         $post->save();
-        dd($post);
+        return 'Post Criado';
     }
 
     public function read(Request $r)
