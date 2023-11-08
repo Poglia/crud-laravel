@@ -37,4 +37,17 @@ class PostController extends Controller
 
         return $posts;
     }
+
+    public function update(Request $r)
+    {
+        $posts = Post::where('id', '>', 2)->update([
+            'author' => 'Maria Betania'
+        ]);
+        // $post = Post::find(3);
+        // $post->content = 'O pato pateta pulou do caneco pisou na galinha bateu no marreco';
+
+        // $post->save();
+
+        return $posts;
+    }
 }
