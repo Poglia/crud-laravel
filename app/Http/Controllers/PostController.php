@@ -2,14 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
-use App\models\Post;
-
 
 class PostController extends Controller
 {
-    public function create(Request $r)
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
     {
+        $posts = Post::all();
+
+        return $posts;
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        // no futuro vai só exibir um form
+
         $newPost = [
             'title' => 'Teste',
             'content' => ' Conteudo do segundo post',
@@ -19,51 +33,59 @@ class PostController extends Controller
         $post  = new Post($newPost);
 
         $post->save();
-        return 'Post Criado';
+        return $post;
     }
 
-    public function read(Request $r)
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        // no futuro receberá um post com um novo recurso
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
     {
         $post = New Post();
-        $post = $post ->find(1); // busca pela chave primaria
+        $post = $post ->find($id); // busca pela chave primaria
 
         return($post);
-
     }
 
-    public function all(Request $r)
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
     {
-        $posts = Post::all();
 
-        return $posts;
-    }
-
-    public function update(Request $r)
-    {
-        $posts = Post::where('id', '>', 2)->update([
+        $posts = Post::find($id)->update([
             'author' => 'Maria Betania'
         ]);
-        // $post = Post::find(3);
-        // $post->content = 'O pato pateta pulou do caneco pisou na galinha bateu no marreco';
-
-        // $post->save();
 
         return $posts;
     }
 
-    public function delete(Request $r)
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
     {
-        $idPost = 4;
-        $post = Post::find($idPost);
+        //
+    }
 
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+
+        $post = Post::find($id)->delete();
+        return $post;
         //Exclusao em massa
         // $post = Post::all()->delete();               // retorna collection (não funciona exclusão)
         // $post = Post::where('id', '>', 0)->delete(); // retorna uma instancia dos models (Pode ser feita exclusão)
-
-        if ($post)
-            return $post->delete(); // retorna o numero de registros excluidos;
-
-
-        return "Não existe nenhum post com id = " . $idPost;
     }
 }
